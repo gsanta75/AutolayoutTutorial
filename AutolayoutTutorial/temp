@@ -1,0 +1,58 @@
+    /*
+    aView = [[myView alloc] init];
+    bView = [[myView alloc] init];
+    cView = [[myView alloc] init];
+    
+    [scrollView addSubview:aView];
+    [scrollView addSubview:bView];
+    [scrollView addSubview:cView];
+    
+    //CenterY Constraint
+    NSLayoutConstraint *cnACenterY = [NSLayoutConstraint constraintWithItem:aView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:scrollView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0];
+    
+    [scrollView addConstraint:cnACenterY];
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(aView, bView, cView);
+    
+    padding = @30;
+    
+    NSDictionary *viewMetrics = NSDictionaryOfVariableBindings(padding);
+    
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-padding-[aView]-padding-[bView(==aView)]-padding-[cView(==bView)]" options:NSLayoutFormatAlignAllTop metrics:viewMetrics views:viewsDictionary]];
+    */
+    
+    /*
+    width = @110;
+    height = @180;
+    NSDictionary *viewMetrics = NSDictionaryOfVariableBindings(padding, width, height);
+    
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-padding-[aView(width)]-padding-[bView(==aView)]-padding-[cView(==bView)]" options:NSLayoutFormatAlignAllTop metrics:viewMetrics views:viewsDictionary]];
+    
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[aView(height)]" options:0 metrics:viewMetrics views:viewsDictionary]];
+    
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bView(==aView)]" options:0 metrics:viewMetrics views:viewsDictionary]];
+    
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[cView(==bView)]" options:0 metrics:viewMetrics views:viewsDictionary]];
+     */
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    
+    float numView = [self.coloredViews count];
+    NumberView *firstView = [self.coloredViews objectAtIndex:0];
+    if (numView && firstView) {
+        scrollView.contentSize = CGSizeMake((numView*(padding.floatValue + firstView.bounds.size.width)) + padding.floatValue, firstView.bounds.size.height);
+    }
+    NSLog(@"%@", NSStringFromCGSize(scrollView.contentSize));
+    
+    //scrollViewShowing = YES;
+
+}
